@@ -18,7 +18,6 @@ import Animated, {
 } from 'react-native-reanimated'
 import { Ionicons } from '@expo/vector-icons'
 import listingsData from '@/assets/data/airbnb-listings.json'
-import { ListingElem } from '@/types'
 
 import defaultStyles from '@/constants/Styles'
 import styles from './listing.style'
@@ -30,10 +29,7 @@ const Page = () => {
   const navigation = useNavigation()
   const { id } = useLocalSearchParams<{ id: string }>()
 
-  const item = (listingsData.features as ListingElem[]).find(
-    (elem) => elem.properties.id === id
-  )
-  const { properties: prop } = item ?? {}
+  const item = listingsData.find((elem) => elem.id === id)
 
   const scrollRef = useAnimatedRef<Animated.ScrollView>()
 
@@ -69,8 +65,8 @@ const Page = () => {
   const shareList = async () => {
     try {
       await Share.share({
-        title: prop?.name,
-        url: prop?.listing_url ?? '',
+        title: item?.name,
+        url: item?.listing_url ?? '',
       })
     } catch (err) {
       console.log(err)
@@ -111,23 +107,23 @@ const Page = () => {
         scrollEventThrottle={16}
       >
         <Animated.Image
-          source={{ uri: prop?.xl_picture_url }}
+          source={{ uri: item?.xl_picture_url! }}
           style={[stylesImg.image, imageAnimatedStyle]}
         />
 
         <View style={styles.infoContainer}>
-          <Text style={styles.name}>{prop?.name}</Text>
+          <Text style={styles.name}>{item?.name}</Text>
           <Text style={styles.location}>
-            {prop?.room_type} in {prop?.smart_location}
+            {item?.room_type} in {item?.smart_location}
           </Text>
           <Text style={styles.rooms}>
-            {prop?.guests_included} guests · {prop?.bedrooms} bedrooms ·{' '}
-            {prop?.beds} bed · {prop?.bathrooms} bathrooms
+            {item?.guests_included} guests · {item?.bedrooms} bedrooms ·{' '}
+            {item?.beds} bed · {item?.bathrooms} bathrooms
           </Text>
           <View style={{ flexDirection: 'row', gap: 4 }}>
             <Ionicons name='star' size={16} />
             <Text style={styles.ratings}>
-              {prop?.review_scores_rating / 20} · {prop?.number_of_reviews}{' '}
+              {item?.review_scores_rating! / 20} · {item?.number_of_reviews}{' '}
               reviews
             </Text>
           </View>
@@ -135,21 +131,21 @@ const Page = () => {
 
           <View style={styles.hostView}>
             <Image
-              source={{ uri: prop?.host_picture_url }}
+              source={{ uri: item?.host_picture_url }}
               style={styles.host}
             />
 
             <View>
               <Text style={{ fontWeight: '500', fontSize: 16 }}>
-                Hosted by {prop?.host_name}
+                Hosted by {item?.host_name}
               </Text>
-              <Text>Host since {prop?.host_since}</Text>
+              <Text>Host since {item?.host_since}</Text>
             </View>
           </View>
 
           <View style={styles.divider} />
 
-          <Text style={styles.description}>{prop?.description}</Text>
+          <Text style={styles.description}>{item?.description}</Text>
         </View>
       </Animated.ScrollView>
 
@@ -159,7 +155,7 @@ const Page = () => {
       >
         <View style={styles.footerContainer}>
           <Pressable style={styles.footerText}>
-            <Text style={styles.footerPrice}>€ {prop?.price}</Text>
+            <Text style={styles.footerPrice}>€ {item?.price}</Text>
             <Text>night</Text>
           </Pressable>
 

@@ -6,6 +6,7 @@ import Listings from '@/components/Listings'
 
 import categories from '@/constants/categories'
 import listingsData from '@/assets/data/airbnb-listings.json'
+import ListingsMap from '@/components/ListingsMap'
 
 const Page = () => {
   const [category, setCategory] = useState(categories[0].name)
@@ -22,7 +23,8 @@ const Page = () => {
           header: () => <ExploreHeader onCategoryChanged={onDataChanged} />,
         }}
       />
-      <Listings listings={items.features} category={category} />
+      {/* <Listings listings={items} category={category} /> */}
+      <ListingsMap listings={items} />
     </View>
   )
 }

@@ -30,9 +30,7 @@ const Listings = ({ listings: items, category }: ListingsProps) => {
     return () => clearTimeout(timer)
   }, [category])
 
-  const renderRow: ListRenderItem<ListingElem> = ({
-    item: { properties: item },
-  }) => (
+  const renderRow: ListRenderItem<ListingElem> = ({ item }) => (
     <Link href={`/listing/${item.id}`} asChild>
       <Pressable>
         <Animated.View

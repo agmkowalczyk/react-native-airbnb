@@ -1,3 +1,4 @@
+// import { ListingElem } from '@/types';
 export enum Fonts {
   mon = 'mon',
   monSb = 'mon-sb',
@@ -5,17 +6,15 @@ export enum Fonts {
 }
 
 export interface ListingsProps {
-  listings: any[]
+  listings: ListingElem[]
   category: string
 }
 
-export interface ListingElem {
-  type: string
-  geometry: Geometry
-  properties: Properties
+export interface ListingsMapProps {
+  listings: ListingElem[]
 }
 
-interface Properties {
+export interface ListingElem {
   id: string
   listing_url: string
   scrape_id: string
@@ -26,14 +25,14 @@ interface Properties {
   description: string
   experiences_offered: string
   neighborhood_overview: string
-  notes?: any
+  notes: string
   transit: string
-  access: string
-  interaction?: any
-  house_rules?: any
+  access: any
+  interaction: string
+  house_rules: string
   thumbnail_url: string
   medium_url: string
-  picture_url: Pictureurl
+  picture_url: PictureUrl
   xl_picture_url: string
   host_id: string
   host_url: string
@@ -41,19 +40,19 @@ interface Properties {
   host_since: string
   host_location: string
   host_about: string
-  host_response_time?: any
-  host_response_rate?: any
-  host_acceptance_rate?: any
+  host_response_time: string
+  host_response_rate: number
+  host_acceptance_rate: string
   host_thumbnail_url: string
   host_picture_url: string
-  host_neighbourhood?: any
+  host_neighbourhood: any
   host_listings_count: number
   host_total_listings_count: number
   host_verifications: string[]
   street: string
-  neighbourhood?: any
+  neighbourhood: any
   neighbourhood_cleansed: string
-  neighbourhood_group_cleansed?: any
+  neighbourhood_group_cleansed: any
   city: string
   state: string
   zipcode: string
@@ -71,42 +70,43 @@ interface Properties {
   beds: number
   bed_type: string
   amenities: string[]
-  square_feet?: any
+  square_feet: any
   price: number
-  weekly_price?: any
-  monthly_price?: any
-  security_deposit?: any
-  cleaning_fee?: any
+  weekly_price: any
+  monthly_price: number
+  security_deposit: any
+  cleaning_fee: number
   guests_included: number
   extra_people: number
   minimum_nights: number
   maximum_nights: number
   calendar_updated: string
-  has_availability?: any
+  has_availability: any
   availability_30: number
   availability_60: number
   availability_90: number
   availability_365: number
   calendar_last_scraped: string
   number_of_reviews: number
-  first_review?: any
-  last_review?: any
-  review_scores_rating?: any
-  review_scores_accuracy?: any
-  review_scores_cleanliness?: any
-  review_scores_checkin?: any
-  review_scores_communication?: any
-  review_scores_location?: any
-  review_scores_value?: any
-  license?: any
-  jurisdiction_names?: any
+  first_review: string
+  last_review: string
+  review_scores_rating: number
+  review_scores_accuracy: number
+  review_scores_cleanliness: number
+  review_scores_checkin: number
+  review_scores_communication: number
+  review_scores_location: number
+  review_scores_value: number
+  license: any
+  jurisdiction_names: any
   cancellation_policy: string
   calculated_host_listings_count: number
-  reviews_per_month?: any
+  reviews_per_month: number
+  geolocation: Geolocation
   features: string[]
 }
 
-interface Pictureurl {
+export interface PictureUrl {
   thumbnail: boolean
   filename: string
   format: string
@@ -119,7 +119,7 @@ interface Pictureurl {
   height: number
 }
 
-interface Geometry {
-  type: string
-  coordinates: number[]
+export interface Geolocation {
+  lon: number
+  lat: number
 }
