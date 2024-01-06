@@ -76,7 +76,7 @@ function RootLayoutNav() {
     if (isLoaded && !isSignedIn) {
       router.push('/(modals)/login')
     }
-  }, [isLoaded])
+  }, [isLoaded, isSignedIn])
 
   return (
     <Stack>

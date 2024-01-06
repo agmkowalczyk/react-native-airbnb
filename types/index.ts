@@ -1,4 +1,3 @@
-// import { ListingElem } from '@/types';
 export enum Fonts {
   mon = 'mon',
   monSb = 'mon-sb',
@@ -8,6 +7,7 @@ export enum Fonts {
 export interface ListingsProps {
   listings: ListingElem[]
   category: string
+  refresh: number
 }
 
 export interface ListingsMapProps {
@@ -29,7 +29,7 @@ export interface ListingElem {
   transit: string
   access: any
   interaction: string
-  house_rules: string
+  house_rules: string | null
   thumbnail_url: string
   medium_url: string
   picture_url: PictureUrl
@@ -42,7 +42,7 @@ export interface ListingElem {
   host_about: string
   host_response_time: string
   host_response_rate: number
-  host_acceptance_rate: string
+  host_acceptance_rate: string | null
   host_thumbnail_url: string
   host_picture_url: string
   host_neighbourhood: any

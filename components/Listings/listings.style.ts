@@ -28,6 +28,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: Fonts.monSb,
   },
+  info: {
+    textAlign: 'center',
+    fontFamily: Fonts.monSb,
+    fontSize: 16,
+    marginTop: 4,
+  },
 })
 
 export default styles

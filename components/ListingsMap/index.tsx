@@ -1,5 +1,5 @@
 import { Text, View, StyleSheet } from 'react-native'
-import React from 'react'
+import React, { memo, useCallback } from 'react'
 import { PROVIDER_GOOGLE, Marker } from 'react-native-maps'
 import MapView from 'react-native-map-clustering'
 import { ListingElem, ListingsMapProps } from '@/types'
@@ -15,14 +15,14 @@ const INITIAL_REGION = {
   longitudeDelta: 1,
 }
 
-const ListingsMap = ({ listings: items }: ListingsMapProps) => {
+const ListingsMap = memo(({ listings: items }: ListingsMapProps) => {
   const router = useRouter()
 
   const onMarkerSelected = (event: ListingElem) => {
     router.push(`/listing/${event.id}`)
   }
 
-  const renderCluster = (cluster: any) => {
+  const renderCluster = useCallback((cluster: any) => {
     const { id, geometry, onPress, properties } = cluster
     const points = properties.point_count
 
@@ -40,7 +40,8 @@ const ListingsMap = ({ listings: items }: ListingsMapProps) => {
         </View>
       </Marker>
     )
-  }
+  }, [])
+
   return (
     <View style={defaultStyles.container}>
       <MapView
@@ -69,6 +70,6 @@ const ListingsMap = ({ listings: items }: ListingsMapProps) => {
       </MapView>
     </View>
   )
-}
+})
 
 export default ListingsMap

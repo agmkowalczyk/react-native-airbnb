@@ -2,15 +2,16 @@ import { View } from 'react-native'
 import React, { useMemo, useState } from 'react'
 import { Stack } from 'expo-router'
 import ExploreHeader from '@/components/ExploreHeader'
-import Listings from '@/components/Listings'
-
-import categories from '@/constants/categories'
-import listingsData from '@/assets/data/airbnb-listings.json'
 import ListingsMap from '@/components/ListingsMap'
+import ListingsBottomSheet from '@/components/ListingsBottomSheet'
+import categories from '@/constants/categories'
+import { ListingElem } from '@/types'
+
+import listingsData from '@/assets/data/airbnb-listings.json'
 
 const Page = () => {
   const [category, setCategory] = useState(categories[0].name)
-  const items = useMemo(() => listingsData as any, [])
+  const items = useMemo(() => listingsData as ListingElem[], [])
 
   const onDataChanged = (category: string) => {
     setCategory(category)
@@ -23,8 +24,8 @@ const Page = () => {
           header: () => <ExploreHeader onCategoryChanged={onDataChanged} />,
         }}
       />
-      {/* <Listings listings={items} category={category} /> */}
       <ListingsMap listings={items} />
+      <ListingsBottomSheet listings={items} category={category} refresh={0} />
     </View>
   )
 }

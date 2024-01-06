@@ -7,7 +7,7 @@ import {
   Dimensions,
   Share,
 } from 'react-native'
-import React, { useLayoutEffect } from 'react'
+import React, { useCallback, useLayoutEffect } from 'react'
 import { useLocalSearchParams, useNavigation } from 'expo-router'
 import Animated, {
   SlideInDown,
@@ -62,7 +62,7 @@ const Page = () => {
     }
   }, [])
 
-  const shareList = async () => {
+  const shareList = useCallback(async () => {
     try {
       await Share.share({
         title: item?.name,
@@ -71,7 +71,7 @@ const Page = () => {
     } catch (err) {
       console.log(err)
     }
-  }
+  }, [])
 
   useLayoutEffect(() => {
     navigation.setOptions({

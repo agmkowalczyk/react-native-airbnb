@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native'
-import React, { useRef, useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import { Link } from 'expo-router'
 import { Ionicons, MaterialIcons } from '@expo/vector-icons'
 import { ScrollView } from 'react-native-gesture-handler'
@@ -23,7 +23,7 @@ const ExploreHeader = ({ onCategoryChanged }: Props) => {
   const scrollRef = useRef<ScrollView>(null)
   const [activeIdx, setActiveIdx] = useState(0)
 
-  const selectCategory = (idx: number) => {
+  const selectCategory = useCallback((idx: number) => {
     const selected = itemsRef.current[idx]
     setActiveIdx(idx)
 
@@ -32,7 +32,8 @@ const ExploreHeader = ({ onCategoryChanged }: Props) => {
     })
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
     onCategoryChanged(categories[idx].name)
-  }
+  }, [])
+
   return (
     <SafeAreaView style={styles.area}>
       <View style={styles.container}>
