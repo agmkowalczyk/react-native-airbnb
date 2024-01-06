@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import React, { useMemo, useState } from 'react'
 import { Stack } from 'expo-router'
 import ExploreHeader from '@/components/ExploreHeader'

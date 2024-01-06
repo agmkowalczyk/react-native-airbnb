@@ -7,6 +7,15 @@ const defaultStyles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+  fontMon: {
+    fontFamily: Fonts.mon,
+  },
+  fontMonB: {
+    fontFamily: Fonts.monB,
+  },
+  fontMonSb: {
+    fontFamily: Fonts.monSb,
+  },
   inputField: {
     height: 44,
     borderWidth: 1,
