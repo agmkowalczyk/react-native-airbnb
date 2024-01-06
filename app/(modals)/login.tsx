@@ -6,9 +6,40 @@ import styles from './login.style'
 import defaultStyles from '@/constants/Styles'
 import { Ionicons } from '@expo/vector-icons'
 import Colors from '@/constants/Colors'
+import { useOAuth } from '@clerk/clerk-expo'
+import { useRouter } from 'expo-router'
+
+enum Strategy {
+  Google = 'oauth_google',
+  Apple = 'oauth_apple',
+  Facebook = 'oauth_facebook',
+}
 
 const Page = () => {
   useWarmUpBrowser()
+  const router = useRouter()
+  const { startOAuthFlow: googleAuth } = useOAuth({ strategy: Strategy.Google })
+  const { startOAuthFlow: appleAuth } = useOAuth({ strategy: Strategy.Apple })
+  const { startOAuthFlow: facebookAuth } = useOAuth({ strategy: Strategy.Facebook })
+
+  const onSelectAuth = async (strategy: Strategy) => {
+    const selectedAuth = {
+      [Strategy.Google]: googleAuth,
+      [Strategy.Apple]: appleAuth,
+      [Strategy.Facebook]: facebookAuth,
+    }[strategy]
+
+    try {
+      const { createdSessionId, setActive } = await selectedAuth()
+
+      if (createdSessionId) {
+        setActive!({ session: createdSessionId })
+        router.back()
+      }
+    } catch (error) {
+      console.error('OAuth error: ', error)
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -37,15 +68,13 @@ const Page = () => {
           />
           <Text style={styles.btnOutlineText}>Continue with Phone</Text>
         </Pressable>
-        <Pressable style={styles.btnOutline}>
-          <Ionicons
-            name='md-logo-apple'
-            size={24}
-            style={defaultStyles.btnIcon}
-          />
-          <Text style={styles.btnOutlineText}>Continue with Apple</Text>
-        </Pressable>
-        <Pressable style={styles.btnOutline}>
+        <Pressable
+          style={({ pressed }) => [
+            styles.btnOutline,
+            pressed && styles.btnOutlinePressed,
+          ]}
+          onPress={() => onSelectAuth(Strategy.Google)}
+        >
           <Ionicons
             name='md-logo-google'
             size={24}
@@ -53,7 +82,23 @@ const Page = () => {
           />
           <Text style={styles.btnOutlineText}>Continue with Google</Text>
         </Pressable>
-        <Pressable style={styles.btnOutline}>
+        <Pressable
+          style={[styles.btnOutline, styles.btnOutlineDisabled]}
+          onPress={() => onSelectAuth(Strategy.Apple)}
+          disabled
+        >
+          <Ionicons
+            name='md-logo-apple'
+            size={24}
+            style={defaultStyles.btnIcon}
+          />
+          <Text style={styles.btnOutlineText}>Continue with Apple</Text>
+        </Pressable>
+        <Pressable
+          style={[styles.btnOutline, styles.btnOutlineDisabled]}
+          onPress={() => onSelectAuth(Strategy.Facebook)}
+          disabled
+        >
           <Ionicons
             name='md-logo-facebook'
             size={24}
