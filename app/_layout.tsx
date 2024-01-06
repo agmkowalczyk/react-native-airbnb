@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import { Pressable } from 'react-native'
 import * as SecureStore from 'expo-secure-store'
 import { ClerkProvider, useAuth } from '@clerk/clerk-expo'
+import { Fonts } from '@/types'
 
 const CLERK_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY
 
@@ -40,9 +41,9 @@ SplashScreen.preventAutoHideAsync()
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    mon: require('../assets/fonts/Montserrat-Regular.ttf'),
-    'mon-sb': require('../assets/fonts/Montserrat-SemiBold.ttf'),
-    'mon-b': require('../assets/fonts/Montserrat-Bold.ttf'),
+    [Fonts.mon]: require('../assets/fonts/Montserrat-Regular.ttf'),
+    [Fonts.monSb]: require('../assets/fonts/Montserrat-SemiBold.ttf'),
+    [Fonts.monB]: require('../assets/fonts/Montserrat-Bold.ttf'),
   })
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
@@ -85,7 +86,7 @@ function RootLayoutNav() {
         options={{
           title: 'Log in or sign up',
           headerTitleStyle: {
-            fontFamily: 'mon-sb',
+            fontFamily: Fonts.monSb,
           },
           presentation: 'modal',
           headerLeft: () => (

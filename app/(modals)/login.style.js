@@ -1,4 +1,5 @@
 import Colors from '@/constants/Colors'
+import { Fonts } from '@/types'
 import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
@@ -14,7 +15,7 @@ const styles = StyleSheet.create({
     marginVertical: 30,
   },
   separator: {
-    fontFamily: 'mon-sb',
+    fontFamily: Fonts.monSb,
     color: Colors.grey,
   },
   btnOutline: {
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
   btnOutlineText: {
     color: '#000',
     fontSize: 16,
-    fontFamily: 'mon-sb',
+    fontFamily: Fonts.monSb,
   },
 })
 

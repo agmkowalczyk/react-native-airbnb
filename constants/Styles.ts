@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native'
 import Colors from '@/constants/Colors'
+import { Fonts } from '@/types'
 
 const defaultStyles = StyleSheet.create({
   container: {
@@ -25,7 +26,7 @@ const defaultStyles = StyleSheet.create({
   btnText: {
     color: '#fff',
     fontSize: 16,
-    fontFamily: 'mon-b',
+    fontFamily: Fonts.monB,
   },
   btnIcon: {
     position: 'absolute',

@@ -6,6 +6,7 @@ import {
   FontAwesome5,
   MaterialCommunityIcons,
 } from '@expo/vector-icons'
+import { Fonts } from '@/types'
 
 const Layout = () => {
   return (
@@ -13,7 +14,7 @@ const Layout = () => {
       screenOptions={{
         tabBarActiveTintColor: Colors.primary,
         tabBarLabelStyle: {
-          fontFamily: 'mon-sb',
+          fontFamily: Fonts.monSb,
         },
       }}
     >
