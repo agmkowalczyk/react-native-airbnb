@@ -9,7 +9,7 @@ export interface ListingsProps {
   category: string
 }
 
-export interface Listing {
+export interface ListingElem {
   type: string
   geometry: Geometry
   properties: Properties

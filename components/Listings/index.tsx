@@ -7,11 +7,12 @@ import {
   Text,
 } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
-import { Listing, ListingsProps } from '@/types'
+import { ListingElem, ListingsProps } from '@/types'
 import { Link } from 'expo-router'
+import { Ionicons } from '@expo/vector-icons'
+import Animated, { FadeInRight, FadeOutLeft } from 'react-native-reanimated'
 
 import styles from './listings.style'
-import { Ionicons } from '@expo/vector-icons'
 import defaultStyles from '@/constants/Styles'
 
 const Listings = ({ listings: items, category }: ListingsProps) => {
@@ -29,12 +30,16 @@ const Listings = ({ listings: items, category }: ListingsProps) => {
     return () => clearTimeout(timer)
   }, [category])
 
-  const renderRow: ListRenderItem<Listing> = ({
+  const renderRow: ListRenderItem<ListingElem> = ({
     item: { properties: item },
   }) => (
     <Link href={`/listing/${item.id}`} asChild>
       <Pressable>
-        <View style={styles.listing}>
+        <Animated.View
+          style={styles.listing}
+          entering={FadeInRight}
+          exiting={FadeOutLeft}
+        >
           <Image source={{ uri: item.medium_url }} style={styles.image} />
           <Pressable style={styles.heart}>
             <Ionicons name='heart-outline' size={24} color='#000' />
@@ -56,13 +61,13 @@ const Listings = ({ listings: items, category }: ListingsProps) => {
             <Text style={defaultStyles.fontMonSb}>€ {item.price}</Text>
             <Text style={defaultStyles.fontMon}>night</Text>
           </View>
-        </View>
+        </Animated.View>
       </Pressable>
     </Link>
   )
 
   return (
-    <View style={{ backgroundColor: 'lightblue' }}>
+    <View>
       <FlatList
         ref={listRef}
         data={loading ? [] : items}
