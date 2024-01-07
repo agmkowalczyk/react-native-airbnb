@@ -5,15 +5,16 @@ import {
   SafeAreaView,
   Pressable,
   Image,
+  TextInput,
 } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useAuth, useUser } from '@clerk/clerk-expo'
 import { Link } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
-
-import defaultStyles, { profilestyles as styles } from '@/constants/Styles'
-import Color from '@/constants/Colors'
+import * as ImagePicker from 'expo-image-picker'
 import { Fonts } from '@/types'
+
+import defaultStyles, { profileStyles as styles } from '@/constants/Styles'
 import Colors from '@/constants/Colors'
 
 const Page = () => {
@@ -33,19 +34,35 @@ const Page = () => {
   }, [user])
 
   const onSaveUser = async () => {
-    // try {
-    //   await user?.update({
-    //     firstName: firstName!,
-    //     lastName: lastName!,
-    //   })
-    // } catch (error) {
-    //   console.log(error)
-    // } finally {
-    setEdit(false)
-    // }
+    try {
+      if (!firstName || !lastName) return
+
+      await user?.update({
+        firstName,
+        lastName,
+      })
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setEdit(false)
+    }
   }
 
-  const onCaptureImage = async () => {}
+  const onCaptureImage = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      quality: 0.75,
+      base64: true,
+    })
+
+    if (!result.canceled) {
+      const base64 = `data:image/png;base64,${result.assets[0].base64}`
+      user?.setProfileImage({
+        file: base64,
+      })
+    }
+  }
 
   return (
     <SafeAreaView style={defaultStyles.container}>
@@ -62,6 +79,18 @@ const Page = () => {
           <View style={{ flexDirection: 'row', gap: 6 }}>
             {edit ? (
               <View style={styles.editRow}>
+                <TextInput
+                  placeholder='First name'
+                  value={firstName || ''}
+                  onChangeText={setFirstName}
+                  style={[defaultStyles.inputField, { width: 100 }]}
+                />
+                <TextInput
+                  placeholder='Lastname'
+                  value={lastName || ''}
+                  onChangeText={setLastName}
+                  style={[defaultStyles.inputField, { width: 100 }]}
+                />
                 <Pressable onPress={onSaveUser}>
                   <Ionicons
                     name='checkmark-outline'
@@ -90,11 +119,11 @@ const Page = () => {
         </View>
       )}
       {isSignedIn && (
-        <Button title='Log out' onPress={() => signOut()} color={Color.dark} />
+        <Button title='Log out' onPress={() => signOut()} color={Colors.dark} />
       )}
       {!isSignedIn && (
         <Link href='/(modals)/login' asChild>
-          <Button title='Log in' color={Color.dark} />
+          <Button title='Log in' color={Colors.dark} />
         </Link>
       )}
     </SafeAreaView>
