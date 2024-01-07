@@ -1,13 +1,13 @@
 import { View, Text, TextInput, Pressable } from 'react-native'
 import React from 'react'
 import { useWarmUpBrowser } from '@/hooks/useWarmUpBrowser'
-
-import styles from './login.style'
-import defaultStyles from '@/constants/Styles'
 import { Ionicons } from '@expo/vector-icons'
 import Colors from '@/constants/Colors'
 import { useOAuth } from '@clerk/clerk-expo'
 import { useRouter } from 'expo-router'
+
+import defaultStyles from '@/constants/Styles'
+import styles from './login.style'
 
 enum Strategy {
   Google = 'oauth_google',
@@ -71,7 +71,7 @@ const Page = () => {
         <Pressable
           style={({ pressed }) => [
             styles.btnOutline,
-            pressed && styles.btnOutlinePressed,
+            pressed && defaultStyles.pressed,
           ]}
           onPress={() => onSelectAuth(Strategy.Google)}
         >

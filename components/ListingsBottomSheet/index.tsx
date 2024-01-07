@@ -6,6 +6,7 @@ import Listings from '@/components/Listings'
 
 import styles from './listingsbottomsheet.style'
 import { Ionicons } from '@expo/vector-icons'
+import defaultStyles from '@/constants/Styles'
 
 const ListingsBottomSheet = (props: ListingsProps) => {
   const bottomSheetRef = useRef<BottomSheet>(null)
@@ -30,7 +31,13 @@ const ListingsBottomSheet = (props: ListingsProps) => {
         <Listings {...props} refresh={refresh} />
 
         <View style={styles.absolutBtn}>
-          <Pressable onPress={showMap} style={styles.btn}>
+          <Pressable
+            onPress={showMap}
+            style={({ pressed }) => [
+              styles.btn,
+              pressed && defaultStyles.pressed,
+            ]}
+          >
             <Text style={styles.btnText}>Map</Text>
             <Ionicons name='map' size={20} color='#fff' />
           </Pressable>

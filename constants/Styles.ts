@@ -16,6 +16,9 @@ const defaultStyles = StyleSheet.create({
   fontMonSb: {
     fontFamily: Fonts.monSb,
   },
+  row: {
+    flexDirection: 'row',
+  },
   inputField: {
     height: 44,
     borderWidth: 1,
@@ -23,7 +26,7 @@ const defaultStyles = StyleSheet.create({
     borderRadius: 8,
     padding: 10,
     backgroundColor: '#fff',
-    color: 'red',
+    color: '#000',
   },
   btn: {
     backgroundColor: Colors.primary,
@@ -57,11 +60,20 @@ const defaultStyles = StyleSheet.create({
     borderTopColor: '#000',
     borderTopWidth: StyleSheet.hairlineWidth,
   },
+  closeModalBtn: {
+    borderColor: Colors.grey,
+    borderRadius: 20,
+    borderWidth: 1,
+    padding: 4,
+  },
+  pressed: {
+    opacity: 0.5,
+  },
 })
 
 export default defaultStyles
 
-export const profilestyles = StyleSheet.create({
+export const profileStyles = StyleSheet.create({
   headerContainer: {
     flexDirection: 'row',
     padding: 24,
@@ -102,5 +114,121 @@ export const profilestyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 8,
+    height: 50,
+  },
+})
+
+export const bookingStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 100,
+  },
+  footerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  footerText: {
+    fontSize: 18,
+    fontFamily: Fonts.monSb,
+    textDecorationLine: 'underline',
+  },
+  previewText: {
+    fontFamily: Fonts.monSb,
+    fontSize: 14,
+    color: Colors.grey,
+  },
+  previewDate: {
+    fontFamily: Fonts.monSb,
+    fontSize: 14,
+    color: Colors.grey,
+  },
+  cardPreview: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 20,
+  },
+  card: {
+    backgroundColor: '#fff',
+    borderRadius: 14,
+    margin: 10,
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
+    gap: 20,
+  },
+  cardHeader: {
+    fontFamily: Fonts.monB,
+    fontSize: 24,
+    padding: 20,
+  },
+  cardBody: {
+    paddingHorizontal: 20,
+  },
+  searchSection: {
+    height: 50,
+    flexDirection: 'row',
+    borderWidth: 1,
+    borderColor: '#ababab',
+    borderRadius: 8,
+    backgroundColor: '#fff',
+    alignContent: 'center',
+    alignItems: 'center',
+    marginBottom: 2,
+  },
+  inputField: {
+    flex: 1,
+    padding: 10,
+    backgroundColor: '#fff',
+  },
+  searchIcon: {
+    padding: 10,
+  },
+  place: {
+    width: 120,
+    height: 120,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: 'lightgrey',
+  },
+  selectedPlace: {
+    borderColor: Colors.grey,
+  },
+  placeText: {
+    fontFamily: Fonts.mon,
+    paddingTop: 6,
+  },
+  placeTextActive: {
+    fontFamily: Fonts.monSb,
+  },
+  guestItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 16,
+  },
+  itemBorder: {
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: Colors.grey,
+  },
+  controlsContainer: {
+    flexDirection: 'row',
+    gap: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  controlTitle: {
+    fontFamily: Fonts.monSb,
+    fontSize: 14,
+  },
+  controlText: {
+    fontFamily: Fonts.mon,
+    fontSize: 14,
+    color: Colors.grey,
   },
 })

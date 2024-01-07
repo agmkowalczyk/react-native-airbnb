@@ -6,6 +6,9 @@ import { Pressable } from 'react-native'
 import * as SecureStore from 'expo-secure-store'
 import { ClerkProvider, useAuth } from '@clerk/clerk-expo'
 import { Fonts } from '@/types'
+import ModalHeaderText from '@/components/ModalHeaderText'
+
+import defaultStyles from '@/constants/Styles'
 
 const CLERK_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY
 
@@ -108,9 +111,14 @@ function RootLayoutNav() {
         options={{
           presentation: 'transparentModal',
           animation: 'fade',
+          headerTransparent: true,
+          headerTitle: () => <ModalHeaderText />,
           headerLeft: () => (
-            <Pressable onPress={() => router.back()}>
-              <Ionicons name='close-outline' size={28} />
+            <Pressable
+              onPress={() => router.back()}
+              style={defaultStyles.closeModalBtn}
+            >
+              <Ionicons name='close-outline' size={22} />
             </Pressable>
           ),
         }}

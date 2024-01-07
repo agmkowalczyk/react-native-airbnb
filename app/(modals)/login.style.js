@@ -29,9 +29,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingHorizontal: 10,
   },
-  btnOutlinePressed: {
-    opacity: 0.5,
-  },
   btnOutlineDisabled: {
     opacity: 0.5,
   },
