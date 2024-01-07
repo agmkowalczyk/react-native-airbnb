@@ -18,9 +18,6 @@ const styles = StyleSheet.create({
     right: 30,
     top: 30,
   },
-  row: {
-    flexDirection: 'row',
-  },
   spaceBetween: {
     justifyContent: 'space-between',
   },

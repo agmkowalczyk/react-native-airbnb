@@ -53,9 +53,9 @@ const Listings = ({ listings: items, category, refresh }: ListingsProps) => {
               <Ionicons name='heart-outline' size={24} color='#000' />
             </Pressable>
 
-            <View style={[styles.row, styles.spaceBetween]}>
+            <View style={[defaultStyles.row, styles.spaceBetween]}>
               <Text style={styles.title}>{item.name}</Text>
-              <View style={[styles.row, { gap: 4 }]}>
+              <View style={[defaultStyles.row, { gap: 4 }]}>
                 <Ionicons name='star' size={16} />
                 <Text style={defaultStyles.fontMonSb}>
                   {item.review_scores_rating ?? 'N/A'}
@@ -65,7 +65,7 @@ const Listings = ({ listings: items, category, refresh }: ListingsProps) => {
 
             <Text style={defaultStyles.fontMonSb}>{item.room_type}</Text>
 
-            <View style={[styles.row, { gap: 4 }]}>
+            <View style={[defaultStyles.row, { gap: 4 }]}>
               <Text style={defaultStyles.fontMonSb}>€ {item.price}</Text>
               <Text style={defaultStyles.fontMon}>night</Text>
             </View>
