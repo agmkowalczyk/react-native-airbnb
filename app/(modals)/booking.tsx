@@ -137,7 +137,86 @@ const Page = () => {
           </ScrollView>
         </>
       </Card>
-      
+      <Card
+        openCard={openCard}
+        setOpenCard={setOpenCard}
+        idx={1}
+        textLeft='When'
+        textRight={'Any week'}
+        title={"When's your trip?"}
+      >
+        <Animated.View style={styles.cardBody}>
+          <DatePicker
+            options={{
+              defaultFont: Fonts.mon,
+              headerFont: Fonts.monSb,
+              borderColor: 'transparent',
+              mainColor: Colors.primary,
+            }}
+            current={today}
+            selected={today}
+            mode='calendar'
+          />
+        </Animated.View>
+      </Card>
+      <Card
+        openCard={openCard}
+        setOpenCard={setOpenCard}
+        idx={2}
+        textLeft='Who'
+        textRight={'Add guest'}
+        title={"Who's coming?"}
+      >
+        <Animated.View style={styles.cardBody}>
+          {groups.map((item, idx) => (
+            <View
+              key={`group-${idx}`}
+              style={[
+                styles.guestItem,
+                idx < groups.length - 1 && styles.itemBorder,
+              ]}
+            >
+              <View>
+                <Text style={styles.controlTitle}>{item.name}</Text>
+                <Text style={styles.controlText}>{item.text}</Text>
+              </View>
+              <View style={styles.controlsContainer}>
+                <Pressable
+                  onPress={() =>
+                    setGroups((state) => {
+                      if (state[idx].count > 0) {
+                        state[idx].count = state[idx].count - 1
+                      }
+                      return [...state]
+                    })
+                  }
+                >
+                  <Ionicons
+                    name='remove-circle-outline'
+                    size={26}
+                    color={groups[idx].count > 0 ? Colors.grey : '#cdcdcd'}
+                  ></Ionicons>
+                </Pressable>
+                <Text>{item.count}</Text>
+                <Pressable
+                  onPress={() =>
+                    setGroups((state) => {
+                      state[idx].count = state[idx].count + 1
+                      return [...state]
+                    })
+                  }
+                >
+                  <Ionicons
+                    name='add-circle-outline'
+                    size={26}
+                    color={Colors.grey}
+                  ></Ionicons>
+                </Pressable>
+              </View>
+            </View>
+          ))}
+        </Animated.View>
+      </Card>
 
       <Animated.View
         style={defaultStyles.footer}

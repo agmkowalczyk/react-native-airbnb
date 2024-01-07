@@ -123,3 +123,9 @@ export interface Geolocation {
   lon: number
   lat: number
 }
+
+export interface GuestGroup {
+  name: string
+  text: string
+  count: number
+}
