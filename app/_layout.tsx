@@ -97,6 +97,8 @@ function RootLayoutNav() {
               <Ionicons name='close-outline' size={28} />
             </Pressable>
           ),
+          headerBackVisible: false,
+          headerTitleAlign: 'center',
         }}
       />
       <Stack.Screen
@@ -121,6 +123,8 @@ function RootLayoutNav() {
               <Ionicons name='close-outline' size={22} />
             </Pressable>
           ),
+          headerBackVisible: false,
+          headerTitleAlign: 'center',
         }}
       />
     </Stack>

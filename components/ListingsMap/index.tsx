@@ -48,7 +48,7 @@ const ListingsMap = memo(({ listings: items }: ListingsMapProps) => {
         animationEnabled={false}
         style={StyleSheet.absoluteFill}
         provider={PROVIDER_GOOGLE}
-        showsUserLocation
+        // showsUserLocation
         showsMyLocationButton
         initialRegion={INITIAL_REGION}
         renderCluster={renderCluster}

@@ -4,6 +4,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  StatusBar
 } from 'react-native'
 import React, { useCallback, useRef, useState } from 'react'
 import { Link } from 'expo-router'
@@ -35,7 +36,7 @@ const ExploreHeader = ({ onCategoryChanged }: Props) => {
   }, [])
 
   return (
-    <SafeAreaView style={styles.area}>
+    <SafeAreaView style={[styles.area, { paddingTop: (StatusBar.currentHeight || 0)+ 10 }]}>
       <View style={styles.container}>
         <View style={styles.actionRow}>
           <Link href='/(modals)/booking' asChild>
