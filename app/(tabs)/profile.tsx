@@ -1,21 +1,30 @@
 import {
   View,
   Text,
-  Button,
   SafeAreaView,
   Pressable,
   Image,
+  StatusBar,
   TextInput,
 } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useAuth, useUser } from '@clerk/clerk-expo'
-import { Link } from 'expo-router'
+import { useRouter } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
 import * as ImagePicker from 'expo-image-picker'
 import { Fonts } from '@/types'
 
 import defaultStyles, { profileStyles as styles } from '@/constants/Styles'
 import Colors from '@/constants/Colors'
+
+const Button = ({ title, onPress }: { title: string; onPress: () => void }) => (
+  <Pressable
+    onPress={onPress}
+    style={{ backgroundColor: '#fff', alignItems: 'center' }}
+  >
+    <Text style={{ fontSize: 16 }}>{title}</Text>
+  </Pressable>
+)
 
 const Page = () => {
   const { signOut, isSignedIn } = useAuth()
@@ -24,6 +33,8 @@ const Page = () => {
   const [lastName, setLastName] = useState(user?.lastName)
   const [email, setEmail] = useState(user?.emailAddresses[0].emailAddress)
   const [edit, setEdit] = useState(false)
+
+  const router = useRouter()
 
   useEffect(() => {
     if (!user) return
@@ -65,7 +76,12 @@ const Page = () => {
   }
 
   return (
-    <SafeAreaView style={defaultStyles.container}>
+    <SafeAreaView
+      style={[
+        defaultStyles.container,
+        { paddingTop: (StatusBar.currentHeight || 0) + 10 },
+      ]}
+    >
       <View style={styles.headerContainer}>
         <Text style={styles.header}>Profile</Text>
         <Ionicons name='notifications-outline' size={26} />
@@ -118,13 +134,9 @@ const Page = () => {
           <Text>Since {user?.createdAt?.toLocaleDateString()}</Text>
         </View>
       )}
-      {isSignedIn && (
-        <Button title='Log out' onPress={() => signOut()} color={Colors.dark} />
-      )}
+      {isSignedIn && <Button title='Log out' onPress={signOut} />}
       {!isSignedIn && (
-        <Link href='/(modals)/login' asChild>
-          <Button title='Log in' color={Colors.dark} />
-        </Link>
+        <Button title='Log in' onPress={() => router.push('/(modals)/login')} />
       )}
     </SafeAreaView>
   )

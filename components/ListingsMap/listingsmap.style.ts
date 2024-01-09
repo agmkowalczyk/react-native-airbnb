@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   },
   markerCluster: {
     backgroundColor: '#cdeac7',
-    padding: 8,
+    padding: 4,
     borderRadius: 100,
     borderColor: '#eef8ec',
     borderWidth: 5,

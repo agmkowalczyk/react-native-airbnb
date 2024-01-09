@@ -190,6 +190,7 @@ const Page = () => {
                       return [...state]
                     })
                   }
+                  hitSlop={20}
                 >
                   <Ionicons
                     name='remove-circle-outline'
@@ -205,6 +206,7 @@ const Page = () => {
                       return [...state]
                     })
                   }
+                  hitSlop={20}
                 >
                   <Ionicons
                     name='add-circle-outline'
@@ -219,7 +221,7 @@ const Page = () => {
       </Card>
 
       <Animated.View
-        style={defaultStyles.footer}
+        style={[defaultStyles.footer, { height: 80 }]}
         entering={SlideInDown.delay(200)}
       >
         <View style={styles.footerContainer}>

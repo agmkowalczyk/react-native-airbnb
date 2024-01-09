@@ -1,5 +1,4 @@
 import {
-  FlatList,
   Image,
   Pressable,
   View,
@@ -11,6 +10,7 @@ import { ListingElem, ListingsProps } from '@/types'
 import { Link } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
 import Animated, { FadeInRight, FadeOutLeft } from 'react-native-reanimated'
+import { FlatList } from 'react-native-gesture-handler'
 // import {
 //   BottomSheetFlatList,
 //   BottomSheetFlatListMethods,

@@ -34,10 +34,10 @@ const Page = () => {
 
       if (createdSessionId) {
         setActive!({ session: createdSessionId })
-        router.back()
+        router.replace('/(tabs)/profile')
       }
-    } catch (error) {
-      console.error('OAuth error: ', error)
+    } catch (error: any) {
+      console.error('OAuth error: ', error?.errors?.[0]?.message)
     }
   }
 
