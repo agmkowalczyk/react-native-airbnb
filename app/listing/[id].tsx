@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Dimensions,
   Share,
+  Alert,
 } from 'react-native'
 import React, { useCallback, useLayoutEffect } from 'react'
 import { useLocalSearchParams, useNavigation } from 'expo-router'
@@ -68,8 +69,8 @@ const Page = () => {
         title: item?.name,
         url: item?.listing_url ?? '',
       })
-    } catch (err) {
-      console.error(err)
+    } catch (err: any) {
+      Alert.alert(err.message)
     }
   }, [])
 

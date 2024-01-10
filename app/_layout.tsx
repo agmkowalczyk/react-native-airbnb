@@ -102,6 +102,40 @@ function RootLayoutNav() {
         }}
       />
       <Stack.Screen
+        name='(modals)/withEmail'
+        options={{
+          title: 'Log in',
+          headerTitleStyle: {
+            fontFamily: Fonts.monSb,
+          },
+          presentation: 'modal',
+          headerLeft: () => (
+            <Pressable onPress={() => router.back()}>
+              <Ionicons name='close-outline' size={28} />
+            </Pressable>
+          ),
+          headerBackVisible: false,
+          headerTitleAlign: 'center',
+        }}
+      />
+      <Stack.Screen
+        name='(modals)/register'
+        options={{
+          title: 'Sign up',
+          headerTitleStyle: {
+            fontFamily: Fonts.monSb,
+          },
+          presentation: 'modal',
+          headerLeft: () => (
+            <Pressable onPress={() => router.back()}>
+              <Ionicons name='close-outline' size={28} />
+            </Pressable>
+          ),
+          headerBackVisible: false,
+          headerTitleAlign: 'center',
+        }}
+      />
+      <Stack.Screen
         name='listing/[id]'
         options={{
           headerTitle: '',

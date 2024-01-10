@@ -1,5 +1,5 @@
 import { View, Text, TextInput, Pressable } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { useWarmUpBrowser } from '@/hooks/useWarmUpBrowser'
 import { Ionicons } from '@expo/vector-icons'
 import Colors from '@/constants/Colors'
@@ -18,9 +18,17 @@ enum Strategy {
 const Page = () => {
   useWarmUpBrowser()
   const router = useRouter()
-  const { startOAuthFlow: googleAuth } = useOAuth({ strategy: Strategy.Google })
-  const { startOAuthFlow: appleAuth } = useOAuth({ strategy: Strategy.Apple })
-  const { startOAuthFlow: facebookAuth } = useOAuth({ strategy: Strategy.Facebook })
+  const [email, setEmail] = useState('')
+
+  const { startOAuthFlow: googleAuth } = useOAuth({
+    strategy: Strategy.Google,
+  })
+  const { startOAuthFlow: appleAuth } = useOAuth({
+    strategy: Strategy.Apple,
+  })
+  const { startOAuthFlow: facebookAuth } = useOAuth({
+    strategy: Strategy.Facebook,
+  })
 
   const onSelectAuth = async (strategy: Strategy) => {
     const selectedAuth = {
@@ -47,9 +55,14 @@ const Page = () => {
         autoCapitalize='none'
         placeholder='Email'
         placeholderTextColor={Colors.grey}
+        value={email}
+        onChangeText={setEmail}
         style={[defaultStyles.inputField, { marginBottom: 30 }]}
       />
-      <Pressable style={defaultStyles.btn}>
+      <Pressable
+        style={defaultStyles.btn}
+        onPress={() => router.replace('/(modals)/withEmail')}
+      >
         <Text style={defaultStyles.btnText}>Continue</Text>
       </Pressable>
 

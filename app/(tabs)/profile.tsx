@@ -6,6 +6,7 @@ import {
   Image,
   StatusBar,
   TextInput,
+  Alert,
 } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useAuth, useUser } from '@clerk/clerk-expo'
@@ -52,8 +53,8 @@ const Page = () => {
         firstName,
         lastName,
       })
-    } catch (error) {
-      console.error(error)
+    } catch (err: any) {
+      Alert.alert(err.errors[0].message)
     } finally {
       setEdit(false)
     }
