@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 import React, { useState } from 'react'
 import { useSignUp } from '@clerk/clerk-expo'
-import { useRouter } from 'expo-router'
+import { useLocalSearchParams, useRouter } from 'expo-router'
 
 import Colors from '@/constants/Colors'
 import defaultStyles from '@/constants/Styles'
@@ -17,8 +17,9 @@ import styles from './login.style'
 const WithEmail = () => {
   const { signUp, setActive, isLoaded } = useSignUp()
   const router = useRouter()
+  const { email: emailProp } = useLocalSearchParams<{ email: string }>()
 
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState(emailProp || '')
   const [password, setPassword] = useState('')
   const [pendingVerification, setPendingVerification] = useState(false)
   const [code, setCode] = useState('')

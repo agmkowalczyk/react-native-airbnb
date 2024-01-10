@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 import React, { useState } from 'react'
 import { useSignIn } from '@clerk/clerk-expo'
-import { Link, useRouter } from 'expo-router'
+import { Link, useLocalSearchParams, useRouter } from 'expo-router'
 
 import Colors from '@/constants/Colors'
 import defaultStyles from '@/constants/Styles'
@@ -17,8 +17,9 @@ import styles from './login.style'
 const WithEmail = () => {
   const { signIn, setActive, isLoaded } = useSignIn()
   const router = useRouter()
+  const { email: emailProp } = useLocalSearchParams<{ email: string }>()
 
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState(emailProp || '')
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
@@ -76,7 +77,10 @@ const WithEmail = () => {
         <Link href={'/(modals)/reset'} style={styles.link}>
           Forgot password?
         </Link>
-        <Link href={'/(modals)/register'} style={styles.link}>
+        <Link
+          href={{ pathname: '/(modals)/register', params: { email } }}
+          style={styles.link}
+        >
           Create Account
         </Link>
       </View>
