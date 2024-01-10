@@ -37,6 +37,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: Fonts.monSb,
   },
+  linkContainer: {
+    alignItems: 'center',
+    paddingTop: 20,
+  },
+  link: {
+    padding: 5,
+  },
 })
 
 export default styles
