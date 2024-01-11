@@ -4,7 +4,7 @@ import { useWarmUpBrowser } from '@/hooks/useWarmUpBrowser'
 import { Ionicons } from '@expo/vector-icons'
 import Colors from '@/constants/Colors'
 import { useOAuth } from '@clerk/clerk-expo'
-import { useLocalSearchParams, useRouter } from 'expo-router'
+import { useRouter } from 'expo-router'
 
 import defaultStyles from '@/constants/Styles'
 import styles from './login.style'
@@ -19,8 +19,7 @@ const Page = () => {
   useWarmUpBrowser()
   const router = useRouter()
   const [email, setEmail] = useState('')
-  const params = useLocalSearchParams()
-  console.log(1, params)
+
   const { startOAuthFlow: googleAuth } = useOAuth({
     strategy: Strategy.Google,
   })
@@ -43,7 +42,7 @@ const Page = () => {
 
       if (createdSessionId) {
         setActive!({ session: createdSessionId })
-        router.replace('/(tabs)/profile')
+        router.push('/(tabs)/profile')
       }
     } catch (error: any) {
       console.error('OAuth error: ', error?.errors?.[0]?.message)

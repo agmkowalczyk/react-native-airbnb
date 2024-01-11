@@ -35,7 +35,7 @@ const WithEmail = () => {
       })
 
       await setActive({ session: completeSignIn.createdSessionId })
-      router.replace('/(tabs)/profile')
+      router.push('/(tabs)/profile')
     } catch (err: any) {
       Alert.alert(err.errors[0].message)
     } finally {
@@ -44,14 +44,14 @@ const WithEmail = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { gap: 30 }]}>
       <TextInput
         autoCapitalize='none'
         placeholder='Email'
         placeholderTextColor={Colors.grey}
         value={email}
         onChangeText={setEmail}
-        style={[defaultStyles.inputField, { marginBottom: 30 }]}
+        style={defaultStyles.inputField}
       />
 
       <TextInput
@@ -60,13 +60,13 @@ const WithEmail = () => {
         placeholderTextColor={Colors.grey}
         value={password}
         secureTextEntry
-        onChangeText={(text) => setPassword(text)}
-        style={[defaultStyles.inputField, { marginBottom: 30 }]}
+        onChangeText={setPassword}
+        style={defaultStyles.inputField}
       />
 
       <Pressable
         style={[defaultStyles.btn, { flexDirection: 'row', gap: 10 }]}
-        onPress={() => onSignInPress()}
+        onPress={onSignInPress}
         disabled={!email || !password}
       >
         {isLoading && <ActivityIndicator color='#fff' />}
@@ -74,7 +74,10 @@ const WithEmail = () => {
       </Pressable>
 
       <View style={styles.linkContainer}>
-        <Link href={'/(modals)/reset'} style={styles.link}>
+        <Link
+          href={{ pathname: '/(modals)/reset', params: { email } }}
+          style={styles.link}
+        >
           Forgot password?
         </Link>
         <Link

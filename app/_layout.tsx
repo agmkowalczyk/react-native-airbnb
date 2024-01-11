@@ -136,6 +136,23 @@ function RootLayoutNav() {
         }}
       />
       <Stack.Screen
+        name='(modals)/reset'
+        options={{
+          title: 'Reset password',
+          headerTitleStyle: {
+            fontFamily: Fonts.monSb,
+          },
+          presentation: 'modal',
+          headerLeft: () => (
+            <Pressable onPress={() => router.back()}>
+              <Ionicons name='close-outline' size={28} />
+            </Pressable>
+          ),
+          headerBackVisible: false,
+          headerTitleAlign: 'center',
+        }}
+      />
+      <Stack.Screen
         name='listing/[id]'
         options={{
           headerTitle: '',
